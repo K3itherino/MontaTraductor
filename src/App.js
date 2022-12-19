@@ -1,25 +1,51 @@
-import logo from './logo.svg';
+import Header from "./components/Header"
+import Form from "./components/Form"
 import './App.css';
+import React from "react";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+  const [languageSelected, setLanguageSelected] = React.useState({translateFrom: "es", translateTo: "ces"})
+    console.log(languageSelected)
+  function changeLanguage(event){
+      
+      const {id, value} = event.target
+      
+      setLanguageSelected(prevLanguage => {
+
+        if (id.length == 2){
+
+          return({
+
+            ...prevLanguage,
+            translateFrom: id
+
+          })
+
+ 
+        }
+        return ({
+
+          ...prevLanguage,
+          translateTo: id
+
+      })
+
+      })
+      }
+
+    
+
+    return (
+      <>
+      <Header />
+      <Form 
+      TranslateFrom={languageSelected.translateFrom}
+      TranslateTo={languageSelected.translateTo}
+      changeLanguage={changeLanguage}
+      />
+      </>
+  )
 }
 
 export default App;
